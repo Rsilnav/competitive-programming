@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+if [ "$#" -ne 3 ]; then
+	echo "Illegal number of parameters"
+fi
+
+if [ "$1" == "new" ]
+then
+	cd "$2"
+	mkdir "$3"
+	cp "../skeleton.cpp" "$3/main.cpp"
+	touch "$3/input"
+	touch "$3/eoutput"
+	pluma "$3/input"
+	pluma "$3/eoutput"
+fi
+
+if [ "$1" == "edit" ]
+then
+	cd "$2"
+	cd "$3"
+	pluma main.cpp
+fi
+
+if [ "$1" == "test" ]
+then
+	cd "$2"
+	cd "$3"
+	g++ -lm -lcrypt -O2 -std=c++11 -pipe -DONLINE_JUDGE -o a.out main.cpp
+	cat input | ./a.out > output
+	DIFF=$(diff output eoutput)
+	if [ "$DIFF" == "" ]
+	then
+		echo "WOOOHOOO! Correct answer!"
+	else
+		echo "Wrong answer"
+		echo "This is your output"
+		cat output
+		echo "--------------"
+		echo "This is the correct output"
+		cat eoutput
+	fi
+fi
