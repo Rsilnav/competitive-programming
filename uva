@@ -11,8 +11,6 @@ then
 	cp "../skeleton.cpp" "$3/main.cpp"
 	touch "$3/input"
 	touch "$3/eoutput"
-	pluma "$3/input"
-	pluma "$3/eoutput"
 fi
 
 if [ "$1" == "edit" ]
