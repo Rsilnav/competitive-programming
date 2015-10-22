@@ -30,6 +30,9 @@ then
 	if [ "$DIFF" == "" ]
 	then
 		echo "WOOOHOOO! Correct answer!"
+		cd ..
+		cd ..
+		./blinkgreen &
 	else
 		echo "Wrong answer"
 		echo "This is your output"
@@ -37,5 +40,8 @@ then
 		echo "--------------"
 		echo "This is the correct output"
 		cat eoutput
+		cd ..
+		cd ..
+		./blinkred &
 	fi
 fi

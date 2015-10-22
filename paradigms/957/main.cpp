@@ -5,17 +5,22 @@ using namespace std;
 int main() {
 	ios_base::sync_with_stdio (false);
 	int numYears, numPopes;
+	int pointer1, pointer2;
+	int bestp1, bestp2;
+	int year;
+
+	int years[100000];
+
 	while (cin >> numYears) {
 		cin >> numPopes;
-		int years[numPopes];
-		int year;
+
 		for (int i=0; i<numPopes; i++) {
 			cin >> year;
 			years[i] = year;
 		}
 
-		int pointer1=0, pointer2=0;
-		int bestp1=0, bestp2=-1;
+		pointer1=0, pointer2=0;
+		bestp1=0, bestp2=-1;
 
 		while (pointer2 < numPopes-1 && pointer1 < numPopes-1) {
 			//printf("%d - %d\n", pointer1, pointer2);

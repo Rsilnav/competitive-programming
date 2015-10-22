@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+sudo /usr/bin/nodejs /home/rafsill/github/msi-keyboard-CLI/msi-keyboard-CLI.js -c red
+sleep .3
+sudo /usr/bin/nodejs /home/rafsill/github/msi-keyboard-CLI/msi-keyboard-CLI.js -k off
