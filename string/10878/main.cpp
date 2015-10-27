@@ -17,7 +17,7 @@ int main() {
 			if (s.at(i) == ' ') {
 				num = num << 1;
 			}
-			if (s.at(i) == 'o') {
+			else if (s.at(i) == 'o') {
 				num = num << 1;
 				num = num | 1;
 			}
