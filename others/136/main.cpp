@@ -11,10 +11,13 @@ int main() {
 	q.push(1);
 
 	for (int i=0; i<1499; i++) {
+		
 		if (q.top()%5 != 0 && q.top()%3 != 0)
 			q.push(q.top()*2);
+
 		if (q.top()%5 != 0)
 			q.push(q.top()*3);
+
 		q.push(q.top()*5);
 
 		q.pop();
