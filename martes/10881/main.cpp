@@ -19,8 +19,6 @@ int main() {
 	int L, T, N;
 
 	for (int cas=0; cas<cases; cas++) {
-
-
 		// Entrada de datos
 		cin >> L >> T >> N;
 
