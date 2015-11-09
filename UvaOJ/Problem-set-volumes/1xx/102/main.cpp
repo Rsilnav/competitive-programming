@@ -6,6 +6,7 @@ int main() {
 	ios_base::sync_with_stdio (false);
 	int b1,g1,c1,b2,g2,c2,b3,g3,c3;
 	int sum[6], min=2147483647;
+	bool found;
 	while (cin >> b1 >> g1 >> c1 >> b2 >> g2 >> c2 >> b3 >> g3 >> c3) {
 		min = 2147483647;
 		sum[0] = b2 + b3 + c1 + c3 + g1 + g2;
@@ -21,7 +22,7 @@ int main() {
 			}
 		}
 
-		bool found = false;
+		found = false;
 		for (int i=0; i<6 && !found; i++) {
 			if (sum[i] == min) {
 				found = true;

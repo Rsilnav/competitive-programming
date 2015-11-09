@@ -36,13 +36,13 @@ int findEmptyInStack(int s) {
 }
 
 void moveOnto(int a, int b) {
-	int stack, pos;
+	int stack, pos, block;
 	stack = findInTable(a);
 	pos = findInStack(stack, a);
 	for (int i=pos+1; i<25; i++) {
 		if (stacks[stack][i] == -1)
 			break;
-		int block = stacks[stack][i];
+		block = stacks[stack][i];
 		stacks[block][findEmptyInStack(block)] = block;
 		stacks[stack][i] = -1;
 	}
@@ -52,7 +52,7 @@ void moveOnto(int a, int b) {
 	for (int i=pos+1; i<25; i++) {
 		if (stacks[stack][i] == -1)
 			break;
-		int block = stacks[stack][i];
+		block = stacks[stack][i];
 		stacks[block][findEmptyInStack(block)] = block;
 		stacks[stack][i] = -1;
 	}
@@ -64,11 +64,12 @@ void moveOver(int a, int b) {
 	int pos = findInStack(stack, a);
 	int stack2 = findInTable(b);
 	int pos2 = findInStack(stack2, b);
+	int block;
 
 	for (int i=pos+1; i<25; i++) {
 		if (stacks[stack][i] == -1)
 			break;
-		int block = stacks[stack][i];
+		block = stacks[stack][i];
 		stacks[block][findEmptyInStack(block)] = block;
 		stacks[stack][i] = -1;
 	}
@@ -78,13 +79,13 @@ void moveOver(int a, int b) {
 }
 
 void pileOnto(int a, int b) {
-	int stack, pos;
+	int stack, pos, block;
 	stack = findInTable(b);
 	pos = findInStack(stack, b);
 	for (int i=pos+1; i<25; i++) {
 		if (stacks[stack][i] == -1)
 			break;
-		int block = stacks[stack][i];
+		block = stacks[stack][i];
 		stacks[block][findEmptyInStack(block)] = block;
 		stacks[stack][i] = -1;
 	}
