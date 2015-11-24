@@ -11,7 +11,7 @@ int main() {
     cin >> numLeido;
     numeros.push_back(numLeido);
     cout << numLeido<< endl;
-    int derecha, izquierda, medio, tam=1,pos;
+    int derecha, izquierda, medio, tam=1,pos=0;
     while(cin >> numLeido){
         izquierda = 0;
         derecha = numeros.size();
@@ -47,10 +47,11 @@ int main() {
     	//busqueda de la media:
         tam++;
         if(tam%2){
-            result += to_string(numeros[tam/2]) + "\n";
+            result += to_string(numeros[pos]) + "\n";
         }
         else{
-            pos = tam/2;
+            //pos = tam/2;
+            pos++;
             mediana = (numeros[pos] + numeros[pos-1])/2;
             result += to_string(mediana) + "\n";
         }
