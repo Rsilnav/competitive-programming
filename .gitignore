@@ -32,3 +32,5 @@ skeleton.cpp
 UvaOJ/483/
 UvaOJ/12247/
 skeleton/
+*.in
+*.ans
