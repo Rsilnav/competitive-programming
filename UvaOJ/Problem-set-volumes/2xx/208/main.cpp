@@ -1,87 +1,60 @@
 #include <iostream>
-#include <vector>
-#include <algorithm>
-#include <iomanip>
-
-#define cn 20
-#define inf 32767
 
 using namespace std;
 
-int backtracking(vector<int> path, vector<vector<int>> ady, vector<vector<int>> paths, int goal) {
-  int ultimo = path.back();
-  int count = 0;
+bool canVisit[21];
+bool matrix[21][21];
+int counter;
+int cases = 1;
 
-  if (ultimo == goal) {
-    cout << path.at(0)+1;
-    for (int i=1; i<path.size(); i++) {
-      cout << " " << path.at(i)+1;
+void buscarCaminos(string path, int n, int destination, int v, int maxim) {
+  if (canVisit[n]) {
+    if (n == destination) {
+      counter++;
+      cout << path << endl;
     }
-    cout << endl;
-    return 1;
-  }
-
-  for (int i=1; i<cn; i++) {
-    cout << i << endl;
-    if (find(path.begin(), path.end(), i) == path.end()) {
-      if (paths[ultimo][i] < inf && ady[ultimo][i] == 1) {
-        path.push_back(i);
-        count += backtracking(path, ady, paths, goal);
-        path.pop_back();
+    else {
+      for (int i=1; i<=maxim; i++) {
+        if ((v & (1 << i)) == 0 && matrix[n][i]) {
+          buscarCaminos(path + " " + to_string(i), i, destination, v | (1 << i), maxim);
+        }
       }
     }
   }
-
-  return count;
 }
 
+void dfs(int n, int maxim) {
+  canVisit[n] = true;
+  for (int i=1; i<=maxim; i++)
+    if (matrix[n][i] && !canVisit[i])
+      dfs(i, maxim);
+}
 
 int main() {
 	ios_base::sync_with_stdio (false);
-	int goal;
-  int a, b;
-  int nums;
-  int cases = 1;
+	int destination, maxim, x, y;
+  while (cin >> destination) {
 
-  while (cin >> goal) {
-
-    cout << "CASE " << cases << ":" << endl;
-
-    vector<vector<int>> ady;
-    for (int i=0; i<cn; i++) {
-      vector<int> temp;
-      for (int j=0; j<cn; j++) {
-        temp.push_back(inf);
-      }
-      ady.push_back(temp);
+    for (int i=0; i<21; i++) {
+      for (int j=0; j<21; j++)
+        matrix[i][j] = false;
+      canVisit[i] = false;
     }
-    while (cin >> a >> b && a && b) {
-      ady[a-1][b-1] = 1;
-      ady[b-1][a-1] = 1;
+    maxim = 0;
+    counter = 0;
+
+    while (cin >> x >> y && x && y) {
+      matrix[x][y] = true;
+      matrix[y][x] = true;
+      maxim = max(max(x, y), maxim);
     }
 
+    dfs(destination, maxim);
+    cout << "CASE " << cases++ << ":\n";
+    buscarCaminos("1", 1, destination, 2, maxim);
+    cout << "There are " << counter << " routes from the firestation to streetcorner " << destination << "." << endl;
 
-    vector<vector<int>> paths;
-    paths = ady;
 
-    for (int i=0; i<cn; i++)
-      paths[i][i] = 0;
-
-    for (int k=0; k<cn; k++)
-      for (int i=0; i<cn; i++)
-        for (int j=0; j<cn; j++) {
-          int dt = paths[i][k] + paths[k][j];
-          if (paths[i][j] > dt)
-            paths[i][j] = dt;
-        }
-
-    vector<int> path;
-    path.push_back(0);
-    nums = backtracking(path, ady, paths, goal-1);
-
-    cout << "There are " << nums << " routes from the firestation to streetcorner " << goal << "." << endl;
-    cases++;
   }
-
 	return 0;
 }
